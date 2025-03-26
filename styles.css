@@ -1,0 +1,360 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CSS Variables */
+:root {
+  --primary-color: #1db954;
+  --background-dark: #121212;
+  --background-light: #282828;
+  --text-light: #b3b3b3;
+  --text-dark: #fff;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #000;
+  padding: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.nav li {
+  list-style: none;
+  margin: 15px 0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.nav li:hover {
+  color: var(--primary-color);
+}
+
+.nav li i {
+  margin-right: 10px;
+}
+
+.playlists {
+  margin-top: 20px;
+}
+
+.playlists h3 {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+.playlists ul {
+  list-style: none;
+}
+
+.playlists ul li {
+  font-size: 14px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.playlists ul li:hover {
+  color: var(--primary-color);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--background-light);
+  padding: 10px;
+  border-radius: 20px;
+  width: 300px;
+}
+
+.search-bar i {
+  margin-right: 10px;
+  color: var(--text-light);
+}
+
+.search-bar input {
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  outline: none;
+  width: 100%;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-profile i {
+  margin-left: 10px;
+  color: var(--text-light);
+}
+
+.user-profile:hover i {
+  color: var(--text-dark);
+}
+
+.banner h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.card {
+  background-color: var(--background-light);
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s, background-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background-color: #383838;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.card h4 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* Play Button */
+.play-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: var(--text-dark);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.card:hover .play-button {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.play-button i {
+  font-size: 16px;
+}
+
+/* Options Button */
+.options-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--text-dark);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .options-button {
+  opacity: 1;
+}
+
+/* Options Dropdown */
+.options-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--background-light);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 10;
+}
+
+.options-dropdown .option {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.options-dropdown .option:hover {
+  background-color: var(--background-dark);
+}
+
+.options-button:hover .options-dropdown {
+  display: block;
+}
+
+/* Delete Button */
+.delete-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 0, 0, 0.7);
+  color: var(--text-dark);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .delete-button {
+  opacity: 1;
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 0.9);
+}
+
+/* Player */
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #181818;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+}
+
+.song-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.song-info h4 {
+  font-size: 14px;
+}
+
+.song-info p {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.controls i {
+  margin: 0 10px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.controls i:hover {
+  color: var(--primary-color);
+}
+
+.volume {
+  display: flex;
+  align-items: center;
+}
+
+.volume i {
+  margin-right: 10px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.volume i:hover {
+  color: var(--primary-color);
+}
+
+.volume input[type="range"] {
+  width: 100px;
+  cursor: pointer;
+}
+
+/* Hide audio element */
+audio {
+  display: none;
+}

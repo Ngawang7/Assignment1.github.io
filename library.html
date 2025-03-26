@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Library - Muse</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="https://render.fineartamerica.com/images/rendered/default/flat/round-beach-towel/images/artworkimages/medium/3/1-muse-band-ruby-winter.jpg?&targetx=100&targety=167&imagewidth=588&imageheight=454&modelwidth=788&modelheight=788&backgroundcolor=000000&orientation=0" alt="Muse Logo">
+        <span>Muse</span>
+      </div>
+      <ul class="nav">
+        <li id="home"><i class="fas fa-home"></i>Home</li>
+        <li><i class="fas fa-search"></i>Search</li>
+        <li><i class="fas fa-book"></i>Your Library</li>
+      </ul>
+      <div class="playlists">
+        <h3>Playlists</h3>
+        <ul>
+          <li>Liked Songs</li>
+          <li>Daily Mix 1</li>
+          <li>Discover Weekly</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header>
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search...">
+        </div>
+        <div class="user-profile">
+          <span>Username</span>
+          <i class="fas fa-user"></i>
+        </div>
+      </header>
+
+      <section class="banner">
+        <h1>Your Library</h1>
+        <p>This is your music library. You can manage your playlists and saved songs here.</p>
+      </section>
+
+      <!-- Liked Songs Section -->
+      <section class="cards" id="liked-songs"></section>
+    </div>
+  </div>
+
+  <script>
+    // Display liked songs
+    const likedSongsContainer = document.getElementById("liked-songs");
+    let library = JSON.parse(localStorage.getItem("library")) || [];
+
+    function renderLibrary() {
+      likedSongsContainer.innerHTML = ""; // Clear the container
+      library.forEach((song, index) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const image = document.createElement("img");
+        image.src = song.image;
+        image.alt = song.title;
+
+        const title = document.createElement("h4");
+        title.textContent = song.title;
+
+        const artist = document.createElement("p");
+        artist.textContent = song.artist;
+
+        const deleteButton = document.createElement("div");
+        deleteButton.classList.add("delete-button");
+        deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+
+        card.appendChild(image);
+        card.appendChild(title);
+        card.appendChild(artist);
+        card.appendChild(deleteButton);
+
+        likedSongsContainer.appendChild(card);
+
+        // Delete functionality
+        deleteButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+          library.splice(index, 1); // Remove the song from the library
+          localStorage.setItem("library", JSON.stringify(library));
+          renderLibrary(); // Re-render the library
+          alert(`${song.title} removed from Your Library!`);
+        });
+      });
+    }
+
+    renderLibrary();
+
+    // Redirect to home page
+    const home = document.getElementById("home");
+    home.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
